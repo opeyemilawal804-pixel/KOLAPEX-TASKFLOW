@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="KOLAPEX TASKFLOW - Smart productivity and task management.">
+  <title>KOLAPEX TASKFLOW | Productivity</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div>
+          <h2>KOLAPEX</h2>
+          <span>TASKFLOW</span>
+        </div>
+      </div>
+
+      <div class="workspace">
+        <div class="workspace-avatar">K</div>
+        <div class="workspace-info">
+          <strong>My Workspace</strong>
+          <span>Personal account</span>
+        </div>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+
+      <div class="nav-heading">WORKSPACE</div>
+      <nav class="navigation">
+        <button class="nav-link active" data-view="dashboard">
+          <i class="fa-solid fa-border-all"></i> Dashboard
+        </button>
+        <button class="nav-link" data-view="tasks">
+          <i class="fa-solid fa-list-check"></i> My Tasks
+          <span class="nav-count" id="taskNavCount">0</span>
+        </button>
+        <button class="nav-link" data-view="projects">
+          <i class="fa-solid fa-folder-open"></i> Projects
+        </button>
+        <button class="nav-link" data-view="calendar">
+          <i class="fa-regular fa-calendar"></i> Calendar
+        </button>
+        <button class="nav-link" data-view="analytics">
+          <i class="fa-solid fa-chart-pie"></i> Analytics
+        </button>
+      </nav>
+
+      <div class="nav-heading second-heading">PREFERENCES</div>
+      <nav class="navigation">
+        <button class="nav-link" data-view="settings">
+          <i class="fa-solid fa-gear"></i> Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="upgrade-card">
+          <div class="upgrade-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Stay productive!</h3>
+          <p>Keep your goals organized and make every day count.</p>
+          <button id="focusBtn">Start focusing <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div class="profile">
+          <div class="profile-avatar">LK</div>
+          <div class="profile-info">
+            <strong>Workspace User</strong>
+            <span>Free account</span>
+          </div>
+          <i class="fa-solid fa-ellipsis"></i>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <header class="topbar">
+        <div class="mobile-brand">
+          <button class="icon-btn mobile-menu" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+          <strong>KOLAPEX</strong>
+        </div>
+        <div class="breadcrumb">Workspace <i class="fa-solid fa-chevron-right"></i> <span id="breadcrumbTitle">Dashboard</span></div>
+        <div class="top-actions">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="searchInput" placeholder="Search tasks...">
+            <kbd>⌘ K</kbd>
+          </div>
+          <button class="icon-btn" id="themeBtn" title="Toggle theme"><i class="fa-regular fa-moon"></i></button>
+          <button class="icon-btn notification-btn" id="notificationBtn" title="Notifications">
+            <i class="fa-regular fa-bell"></i><span></span>
+          </button>
+          <div class="top-avatar">LK</div>
+        </div>
+      </header>
+
+      <div class="page-content">
+
+        <!-- DASHBOARD -->
+        <section class="view-section active" id="dashboard">
+          <div class="welcome-row">
+            <div>
+              <div class="eyebrow"><span class="live-dot"></span> YOUR PRODUCTIVITY SPACE</div>
+              <h1>Good day, <span>Welcome back!</span></h1>
+              <p>Here's what's happening with your projects today.</p>
+            </div>
+            <button class="primary-btn" id="addTaskBtn">
+              <i class="fa-solid fa-plus"></i> Create new task
+            </button>
+          </div>
+
+          <div class="date-banner">
+            <div class="date-icon"><i class="fa-regular fa-calendar-check"></i></div>
+            <div><strong id="todayDate">Today</strong><span>Make today count. One task at a time.</span></div>
+            <div class="date-decoration"><i class="fa-solid fa-sun"></i></div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-top"><span>Total Tasks</span><div class="stat-icon green"><i class="fa-solid fa-list-check"></i></div></div>
+              <h2 id="totalTasks">0</h2>
+              <p>All your tasks</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top"><span>Completed</span><div class="stat-icon blue"><i class="fa-solid fa-check"></i></div></div>
+              <h2 id="completedTasks">0</h2>
+              <p>Tasks finished</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top"><span>In Progress</span><div class="stat-icon orange"><i class="fa-solid fa-clock"></i></div></div>
+              <h2 id="pendingTasks">0</h2>
+              <p>Still in progress</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top"><span>Overdue</span><div class="stat-icon red"><i class="fa-solid fa-calendar-xmark"></i></div></div>
+              <h2 id="overdueTasks">0</h2>
+              <p>Past their deadlines</p>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="panel tasks-panel">
+              <div class="panel-heading">
+                <div><h3>Recent Tasks</h3><p>Keep track of your latest activities.</p></div>
+                <button class="text-btn" data-goto="tasks">View all <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+              <div id="recentTasks" class="task-list"></div>
+            </div>
+
+            <div class="panel progress-panel">
+              <div class="panel-heading"><div><h3>Task Progress</h3><p>Your productivity overview.</p></div></div>
+              <div class="progress-circle-wrap">
+                <div class="progress-circle" id="progressCircle">
+                  <div><strong id="progressPercent">0%</strong><span>Completed</span></div>
+                </div>
+              </div>
+              <div class="progress-legend">
+                <div><span class="legend-dot green-dot"></span> Completed <strong id="legendCompleted">0</strong></div>
+                <div><span class="legend-dot orange-dot"></span> Remaining <strong id="legendRemaining">0</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel quick-panel">
+            <div class="panel-heading"><div><h3>Quick productivity tip</h3><p>Small steps lead to big results.</p></div><i class="fa-solid fa-lightbulb tip-icon"></i></div>
+            <p class="tip-text">Focus on your most important task first. Break bigger projects into smaller, achievable steps and celebrate your progress.</p>
+          </div>
+        </section>
+
+        <!-- TASKS -->
+        <section class="view-section" id="tasks">
+          <div class="page-title-row">
+            <div><div class="eyebrow">GET THINGS DONE</div><h1>My Tasks</h1><p>Organize your day and stay on top of your work.</p></div>
+            <button class="primary-btn" id="addTaskBtn2"><i class="fa-solid fa-plus"></i> Add task</button>
+          </div>
+          <div class="filter-row">
+            <div class="filter-tabs">
+              <button class="filter-btn active" data-filter="all">All tasks</button>
+              <button class="filter-btn" data-filter="active">Active</button>
+              <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+            <select id="priorityFilter" class="select-control">
+              <option value="all">All priorities</option>
+              <option value="High">High priority</option>
+              <option value="Medium">Medium priority</option>
+              <option value="Low">Low priority</option>
+            </select>
+          </div>
+          <div class="panel all-tasks-panel">
+            <div id="allTasksList" class="task-list"></div>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="view-section" id="projects">
+          <div class="page-title-row">
+            <div><div class="eyebrow">ORGANIZE YOUR WORK</div><h1>Projects</h1><p>Group your tasks and manage your goals.</p></div>
+            <button class="primary-btn" id="addProjectBtn"><i class="fa-solid fa-plus"></i> New project</button>
+          </div>
+          <div class="project-grid" id="projectGrid"></div>
+        </section>
+
+        <!-- CALENDAR -->
+        <section class="view-section" id="calendar">
+          <div class="page-title-row">
+            <div><div class="eyebrow">PLAN YOUR SCHEDULE</div><h1>Calendar</h1><p>Keep an eye on your upcoming deadlines.</p></div>
+            <button class="primary-btn" id="calendarAddBtn"><i class="fa-solid fa-plus"></i> Add task</button>
+          </div>
+          <div class="panel calendar-panel">
+            <div class="calendar-heading">
+              <button class="icon-btn" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+              <h3 id="monthLabel"></h3>
+              <button class="icon-btn" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </div>
+        </section>
+
+        <!-- ANALYTICS -->
+        <section class="view-section" id="analytics">
+          <div class="page-title-row">
+            <div><div class="eyebrow">MEASURE YOUR GROWTH</div><h1>Analytics</h1><p>Understand your productivity at a glance.</p></div>
+          </div>
+          <div class="stats-grid analytics-stats">
+            <div class="stat-card"><div class="stat-top"><span>Total tasks</span><div class="stat-icon green"><i class="fa-solid fa-list"></i></div></div><h2 id="analyticsTotal">0</h2><p>Tasks created</p></div>
+            <div class="stat-card"><div class="stat-top"><span>Completion rate</span><div class="stat-icon blue"><i class="fa-solid fa-chart-line"></i></div></div><h2 id="analyticsRate">0%</h2><p>Overall completion</p></div>
+            <div class="stat-card"><div class="stat-top"><span>High priority</span><div class="stat-icon red"><i class="fa-solid fa-flag"></i></div></div><h2 id="analyticsHigh">0</h2><p>Important tasks</p></div>
+            <div class="stat-card"><div class="stat-top"><span>Projects</span><div class="stat-icon orange"><i class="fa-solid fa-folder"></i></div></div><h2 id="analyticsProjects">0</h2><p>Your projects</p></div>
+          </div>
+          <div class="panel analytics-panel">
+            <div class="panel-heading"><div><h3>Task completion</h3><p>Completed versus remaining tasks.</p></div></div>
+            <div class="bar-chart" id="barChart"></div>
+            <div class="chart-legend"><span><i class="legend-dot green-dot"></i> Completed</span><span><i class="legend-dot orange-dot"></i> Remaining</span></div>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="view-section" id="settings">
+          <div class="page-title-row"><div><div class="eyebrow">PERSONALIZE YOUR EXPERIENCE</div><h1>Settings</h1><p>Manage your workspace preferences.</p></div></div>
+          <div class="panel settings-panel">
+            <h3>Appearance</h3>
+            <p>Choose how your workspace looks.</p>
+            <div class="setting-row"><div><strong>Dark mode</strong><span>Switch between light and dark themes.</span></div><label class="switch"><input type="checkbox" id="darkModeToggle"><span class="slider"></span></label></div>
+            <div class="setting-row"><div><strong>Workspace name</strong><span>KOLAPEX TASKFLOW</span></div><span class="setting-value">Personal</span></div>
+            <div class="setting-row"><div><strong>Storage</strong><span>Your tasks are saved in this browser.</span></div><span class="setting-value">Local storage</span></div>
+            <div class="settings-danger"><h3>Data management</h3><p>Delete all your locally saved tasks and projects.</p><button class="danger-btn" id="clearDataBtn">Clear all data</button></div>
+          </div>
+        </section>
+
+        <footer class="footer"><span>© 2026 KOLAPEX TASKFLOW</span><span>Designed for productivity <i class="fa-solid fa-heart"></i></span></footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- TASK MODAL -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal">
+      <div class="modal-heading"><div><h2 id="modalTitle">Create new task</h2><p>Add something you want to accomplish.</p></div><button class="icon-btn close-modal"><i class="fa-solid fa-xmark"></i></button></div>
+      <form id="taskForm">
+        <input type="hidden" id="editTaskId">
+        <label for="taskName">Task name</label>
+        <input type="text" id="taskName" placeholder="e.g. Complete website design" required maxlength="100">
+        <label for="taskDescription">Description</label>
+        <textarea id="taskDescription" placeholder="Add more details..." rows="3"></textarea>
+        <div class="form-grid">
+          <div><label for="taskPriority">Priority</label><select id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select></div>
+          <div><label for="taskDueDate">Due date</label><input type="date" id="taskDueDate" required></div>
+        </div>
+        <label for="taskProject">Project</label>
+        <select id="taskProject"><option value="General">General</option></select>
+        <div class="modal-actions"><button type="button" class="secondary-btn close-modal">Cancel</button><button type="submit" class="primary-btn">Save task <i class="fa-solid fa-arrow-right"></i></button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PROJECT MODAL -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal">
+      <div class="modal-heading"><div><h2>New project</h2><p>Create a space for related tasks.</p></div><button class="icon-btn close-project-modal"><i class="fa-solid fa-xmark"></i></button></div>
+      <form id="projectForm">
+        <label for="projectName">Project name</label>
+        <input type="text" id="projectName" placeholder="e.g. Website Development" required maxlength="50">
+        <label for="projectColor">Project color</label>
+        <select id="projectColor"><option value="green">Emerald</option><option value="blue">Blue</option><option value="purple">Purple</option><option value="orange">Orange</option></select>
+        <div class="modal-actions"><button type="button" class="secondary-btn close-project-modal">Cancel</button><button type="submit" class="primary-btn">Create project</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMessage">Success</span></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
